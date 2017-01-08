@@ -1,0 +1,25 @@
+{
+  "name": "reactcomponents",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.1.6",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "install": "^0.8.4",
+    "npm": "^4.0.5",
+    "webpack": "^1.14.0"
+  }
+}
