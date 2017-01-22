@@ -2,13 +2,27 @@ var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
+var path = require("path");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
     devtool: 'source-map',
-    entry: './main.js',
-    output: { path: __dirname, filename: 'bundle.js' },
+    entry: {
+        initial: './app/initial',
+        1: './app/1',
+        2: './app/2',
+        3: './app/3',
+        4: './app/4',
+        5: './app/5',
+        6: './app/6'
+    },
+    output: {
+        path: path.join(__dirname, 'build'),
+        publicPath: '/build/',
+        filename: '[name].js',
+        chunkFilename: "[id].chunk.js"
+    },
     module: {
         loaders: [
             {
@@ -37,6 +51,10 @@ module.exports = {
                 browsers: ['last 4 versions', '> 2%', 'ie 9', 'safari 8 ']
             })]
         };
+    },
+    devServer:{
+        contentBase: './app',
+        hot: true
     },
     plugins: [
         new ExtractTextPlugin('[name].css', {allChunks: true}),
