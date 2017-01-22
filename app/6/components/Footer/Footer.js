@@ -8,7 +8,8 @@ class Footer extends React.Component {
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.color
+            backgroundColor: this.props.color,
+            height: '100%'
         };
 
         return (
