@@ -10,12 +10,13 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         initial: './app/initial',
-        1: './app/1',
-        2: './app/2',
-        3: './app/3',
-        4: './app/4',
-        5: './app/5',
-        6: './app/6'
+        1: './app/1', //default props
+        2: './app/2', //refs
+        3: './app/3', //callback
+        4: './app/4', //context
+        5: './app/5', //event emitter
+        6: './app/6', //portal
+        7: './app/7'  //redux
     },
     output: {
         path: path.join(__dirname, 'build'),
