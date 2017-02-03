@@ -1,40 +1,55 @@
-export const RIGHT_COLUMN_CHANGE_COLOR = 'RIGHT_COLUMN_CHANGE_COLOR';
-export const FOOTER_CHANGE_COLOR = 'FOOTER_CHANGE_COLOR';
+export const CHANGE_RIGHT_COLUMN_COLOR = 'CHANGE_RIGHT_COLUMN_COLOR';
+export const CHANGE_FOOTER_COLOR = 'CHANGE_FOOTER_COLOR';
 export const REQUEST_COLORS = 'REQUEST_COLORS';
-export const RECEIVE_COLORS = 'RECEIVE_COLORS';
+export const SUCCESS_COLORS = 'SUCCESS_COLORS';
+export const FAILURE_COLORS = 'FAILURE_COLORS';
 
-export function rightColumnChangeColor(color) {
+export function changeRightColumnColor(color) {
     return {
-        type: RIGHT_COLUMN_CHANGE_COLOR,
+        type: CHANGE_RIGHT_COLUMN_COLOR,
         payload: {
             color: color
         }
     };
 }
 
-export function footerChangeColor(color) {
+export function changeFooterColor(color) {
     return {
-        type: FOOTER_CHANGE_COLOR,
+        type: CHANGE_FOOTER_COLOR,
         payload: {
             color: color
         }
     };
 }
 
-export function requestColors(url) {
+function requestColors() {
     return {
-        type: REQUEST_COLORS,
-        payload: {
-            url: url
-        }
-    };
+        type: REQUEST_COLORS
+    }
 }
 
-export function receiveColors(json) {
+function successColors(json) {
     return {
-        type: RECEIVE_COLORS,
+        type: SUCCESS_COLORS,
         payload: {
-            colors: json
+            data: json
         }
+    }
+}
+
+function failureColors(error) {
+    return {
+        type: FAILURE_COLORS,
+        error
+    }
+}
+
+export function updateColors(url) {
+    return (dispatch) => {
+        dispatch(requestColors());
+        return fetch(url)
+            .then(result => result.json(),
+                    error => dispatch(failureColors(error)))
+            .then(json => dispatch(successColors(json)))
     };
 }

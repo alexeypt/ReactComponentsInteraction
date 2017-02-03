@@ -16,7 +16,9 @@ module.exports = {
         4: './app/4', //context
         5: './app/5', //event emitter
         6: './app/6', //portal
-        7: './app/7'  //redux
+        7: './app/7',  //redux
+        8: './app/8',  //mobx
+        9: './app/9'  //cursor
     },
     output: {
         path: path.join(__dirname, 'build'),

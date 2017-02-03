@@ -6,7 +6,7 @@ import styles from './App.less';
 
 class App extends React.Component {
     static propTypes = {
-        color: PropTypes.string.isRequired//from Redux store
+        color: PropTypes.string.isRequired
     }
 
     render() {
@@ -16,9 +16,9 @@ class App extends React.Component {
 
         return (
             <div style={divStyles} className={styles['app']}>
-                <Header />
-                <Container />
-                <Footer />
+                <Header color="red" />
+                <Container color="green" />
+                <Footer color="yellow" />
             </div>);
     }
 

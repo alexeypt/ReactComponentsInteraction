@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import styles from './RightColumn.less';
 
 class RightColumn extends React.Component {
@@ -20,8 +19,4 @@ class RightColumn extends React.Component {
     }
 }
 
-export default connect((state) => {
-    return {
-        color: state.colors.rightColumnColor
-    };
-})(RightColumn);
+export default RightColumn;

@@ -1,21 +1,22 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import {observer, inject} from 'mobx-react';
 import LeftColumn from '../LeftColumn/LeftColumn.js';
 import RightColumn from '../RightColumn/RightColumn.js';
 import styles from './Container.less';
 
+@inject("store") @observer
 class Container extends React.Component {
     static propTypes = {
-        color: PropTypes.string.isRequired //from Redux store
+        store: PropTypes.object.isRequired
     }
-
+    
     render() {
         let divStyles = {
-            backgroundColor: this.props.color
+            backgroundColor: this.props.store.containerColor
         };
 
         return (
-            <div style={divStyles} className={styles.container}>
+            <div style={divStyles} className={styles.container} >
                 <LeftColumn />
                 <RightColumn />
             </div>
@@ -23,8 +24,4 @@ class Container extends React.Component {
     }
 }
 
-export default connect((state) => {
-    return {
-        color: state.colors.containerColor
-    };
-})(Container);
+export default Container;
