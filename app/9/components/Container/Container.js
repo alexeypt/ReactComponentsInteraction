@@ -18,15 +18,19 @@ class Container extends React.Component {
     }
 
     onComponentClick(){
-        const tempColor = this.state.leftColumnColor;
-        this.setState({
-            leftColumnColor: this.state.rightColumnColor,
-            rightColumnColor: tempColor});
+        this.props.cur.swap(v => Object.assign({}, v, {
+            color: 'black'
+        }));
+        //const tempColor = this.state.leftColumnColor;
+        //this.setState({
+        //    leftColumnColor: this.state.rightColumnColor,
+        //    rightColumnColor: tempColor});
     }
 
     render() {
+        debugger;
         let divStyles = {
-            backgroundColor: this.state.color
+            backgroundColor: this.props.cur.value().color
         };
 
         return (
