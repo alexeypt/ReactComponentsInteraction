@@ -3,12 +3,12 @@ import styles from './LeftColumn.less';
 
 class LeftColumn extends React.Component {
     static propTypes = {
-        color: PropTypes.string.isRequired
+        cursor: PropTypes.object.isRequired
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.color
+            backgroundColor: this.props.cursor.value().leftColumnColor
         };
 
         return (

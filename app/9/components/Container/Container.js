@@ -5,38 +5,18 @@ import styles from './Container.less';
 
 class Container extends React.Component {
     static propTypes = {
-        color: PropTypes.string.isRequired
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            color: this.props.color,
-            leftColumnColor: "blue",
-            rightColumnColor: "purple"
-        };
-    }
-
-    onComponentClick(){
-        this.props.cur.swap(v => Object.assign({}, v, {
-            color: 'black'
-        }));
-        //const tempColor = this.state.leftColumnColor;
-        //this.setState({
-        //    leftColumnColor: this.state.rightColumnColor,
-        //    rightColumnColor: tempColor});
+        cursor: PropTypes.object.isRequired
     }
 
     render() {
-        debugger;
         let divStyles = {
-            backgroundColor: this.props.cur.value().color
+            backgroundColor: this.props.cursor.value().containerColor
         };
 
         return (
-            <div style={divStyles} className={styles.container} onClick={this.onComponentClick.bind(this)}>
-                <LeftColumn color={this.state.leftColumnColor} />
-                <RightColumn color={this.state.rightColumnColor} />
+            <div style={divStyles} className={styles.container} >
+                <LeftColumn cursor={this.props.cursor} />
+                <RightColumn cursor={this.props.cursor} />
             </div>
         );
     }

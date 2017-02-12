@@ -13,23 +13,19 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            header: {
-                color: 'red'
-            },
-            container: {
-                color: 'green',
+            colors: {
+                headerColor: 'red',
+                containerColor: 'green',
                 leftColumnColor: 'blue',
-                rightColumnColor: 'purple'
-            },
-            footer: {
+                rightColumnColor: 'purple',
                 footerColor: 'yellow'
             }
         };
     }
 
     render() {
-        debugger;
-        let cur = Cursor.build(this);
+        let cursor = Cursor.build(this);
+        let colorsCursor = cursor.refine('colors');
 
         let divStyles = {
             backgroundColor: this.props.color
@@ -37,9 +33,9 @@ class App extends React.Component {
 
         return (
             <div style={divStyles} className={styles['app']}>
-                <Header color="red" />
-                <Container color="green" cur={cur.refine('container')} />
-                <Footer color="yellow" />
+                <Header cursor={colorsCursor} />
+                <Container cursor={colorsCursor} />
+                <Footer cursor={colorsCursor} />
             </div>);
     }
 
