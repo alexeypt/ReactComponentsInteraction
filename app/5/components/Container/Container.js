@@ -21,6 +21,7 @@ class Container extends React.Component {
 
         return (
             <div style={divStyles} className={styles.container} onClick={this.onComponentClick.bind(this)}>
+                <span className={styles.title}>Container</span>
                 <LeftColumn color="blue" />
                 <RightColumn color="purple" />
             </div>

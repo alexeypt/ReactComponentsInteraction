@@ -33,6 +33,7 @@ class Container extends React.Component {
 
         return (
             <div style={divStyles} className={styles.container} onClick={this.onComponentClick.bind(this)}>
+                <span className={styles.title}>Container</span>
                 <LeftColumn color={this.state.leftColumnColor} />
                 <RightColumn color={this.state.rightColumnColor} />
                 <Gateway into="footer">

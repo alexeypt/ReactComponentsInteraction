@@ -17,6 +17,7 @@ class Container extends React.Component {
 
         return (
             <div style={divStyles} className={styles.container} >
+                <span className={styles.title}>Container</span>
                 <LeftColumn />
                 <RightColumn />
             </div>

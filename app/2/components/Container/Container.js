@@ -10,22 +10,28 @@ class Container extends React.Component {
 
     constructor(props) {
         super(props);
+        this.leftColumnComponent = null;
         this.rightColumnComponent = null;
         this.state = {
             color: this.props.color,
             leftColumnColor: "blue",
             rightColumnColor: "purple"
         };
+        this.leftColumnRefFunction = this.leftColumnRefFunction.bind(this);
     }
 
     onComponentClick(){
-        const tempColor = this.refs.leftColumn.state.color;
-        this.refs.leftColumn.setState({
+        const tempColor = this.leftColumnComponent.state.color;
+        this.leftColumnComponent.setState({
             color: this.rightColumnComponent.state.color
         });
         this.rightColumnComponent.onColorChange(tempColor);
     }
 
+    leftColumnRefFunction(component){
+        this.leftColumnComponent = component;
+    }
+    
     render() {
         let divStyles = {
             backgroundColor: this.state.color
@@ -33,7 +39,8 @@ class Container extends React.Component {
 
         return (
             <div style={divStyles} className={styles.container} onClick={this.onComponentClick.bind(this)}>
-                <LeftColumn ref="leftColumn" color={this.state.leftColumnColor} />
+                <span className={styles.title}>Container</span>
+                <LeftColumn ref={this.leftColumnRefFunction} color={this.state.leftColumnColor} />
                 <RightColumn ref={(component) => { this.rightColumnComponent = component; }} color={this.state.rightColumnColor} />
             </div>
         );

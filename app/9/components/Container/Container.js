@@ -15,6 +15,7 @@ class Container extends React.Component {
 
         return (
             <div style={divStyles} className={styles.container} >
+                <span className={styles.title}>Container</span>
                 <LeftColumn cursor={this.props.cursor} />
                 <RightColumn cursor={this.props.cursor} />
             </div>

@@ -33,6 +33,7 @@ class Container extends React.Component {
 
         return (
             <div style={divStyles} className={styles.container}>
+                <span className={styles.title}>Container</span>
                 <LeftColumn color={this.state.leftColumnColor} parentColor={this.state.color} onChangeColor={this.changeColor.bind(this)} />
                 <RightColumn ref={(component) => { this.rightColumnComponent = component; }} color={this.state.rightColumnColor} />
             </div>
