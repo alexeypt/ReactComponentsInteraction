@@ -27,39 +27,74 @@ module.exports = {
         chunkFilename: "[id].chunk.js"
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /.jsx?$/,
-                loader: 'babel-loader',
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    }
+                ],
                 exclude: /node_modules/
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap&localIdentName=[name]__[local]!postcss-loader!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true'),
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 2,
+                            sourceMap: true,
+                            localIdentName: '[name]__[local]'
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function () {
+                                return {
+                                    defaults: [
+                                        precss, autoprefixer({
+                                            browsers: ['last 4 versions', '> 2%', 'ie 9', 'safari 8']
+                                        })],
+                                    cleaner: [autoprefixer({
+                                        browsers: ['last 4 versions', '> 2%', 'ie 9', 'safari 8 ']
+                                    })]
+                                }
+                            }
+                        } 
+                    }, 
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            outputStyle: 'expanded',
+                            sourceMap: true,
+                            sourceMapContents: true
+                        }
+                    }]
+                }),
                 exclude: /node_modules/
             },
             {
                 test: /(\.eot|\.woff2|\.woff|\.ttf|\.svg)/,
-                loader: 'file-loader'
+                use: [
+                    {
+                        loader: 'file-loader'
+                    }
+                ]
             }
         ]
     },
-    postcss: function() {
-        return {
-            defaults: [
-                precss, autoprefixer({
-                    browsers: ['last 4 versions', '> 2%', 'ie 9', 'safari 8']
-                })],
-            cleaner: [autoprefixer({
-                browsers: ['last 4 versions', '> 2%', 'ie 9', 'safari 8 ']
-            })]
-        };
-    },
     devServer:{
         contentBase: './app',
-        hot: true
+        hot: false
     },
     plugins: [
-        new ExtractTextPlugin('[name].css', {allChunks: true}),
+        new ExtractTextPlugin({
+            filename: '[name].css',
+            allChunks: true
+        })
     ]
 };
