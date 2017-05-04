@@ -28,7 +28,10 @@ class App extends React.Component {
     getChildContext() {
         return {
             leftColumnColor: this.state.leftColumnColor,
-            rightColumnColor: this.state.rightColumnColor
+            rightColumnColor: this.state.rightColumnColor,
+            headerColor: 'red',
+            containerColor: 'green',
+            footerColor: 'yellow'
         };
     }
 
@@ -46,9 +49,9 @@ class App extends React.Component {
 
         return (
             <div style={divStyles} className={styles['app']} onClick={this.onAppClick.bind(this)}>
-                <Header color="red" />
-                <Container color="green"/>
-                <Footer color="yellow" />
+                <Header/>
+                <Container/>
+                <Footer/>
             </div>);
     }
 

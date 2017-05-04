@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 import styles from './Footer.less';
 
 class Footer extends React.Component {
-    static propTypes  = {
-        color: React.PropTypes.string
+    static contextTypes  = {
+        footerColor: React.PropTypes.string
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.color
+            backgroundColor: this.context.footerColor
         };
 
         return (

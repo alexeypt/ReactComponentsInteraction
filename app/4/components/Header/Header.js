@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 import styles from './Header.less';
 
 class Header extends React.Component {
-    static propTypes  = {
-        color: React.PropTypes.string
+    static contextTypes  = {
+        headerColor: React.PropTypes.string
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.color
+            backgroundColor: this.context.headerColor
         };
 
         return (

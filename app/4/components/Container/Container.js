@@ -4,13 +4,13 @@ import RightColumn from '../RightColumn/RightColumn.js';
 import styles from './Container.less';
 
 class Container extends React.Component {
-    static propTypes  = {
-        color: React.PropTypes.string
+    static contextTypes  = {
+        containerColor: React.PropTypes.string
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.color
+            backgroundColor: this.context.containerColor
         };
 
         return (
