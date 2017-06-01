@@ -1,4 +1,4 @@
-import {observable, action, autorun} from 'mobx';
+import {observable, computed, action, autorun} from 'mobx';
 
 export default class ColorsStore {
     @observable headerColor = 'red';
@@ -6,6 +6,10 @@ export default class ColorsStore {
     @observable footerColor = 'yellow';
     @observable leftColumnColor = 'blue';
     @observable rightColumnColor = 'purple';
+
+    @computed get headerHexColor(){
+        return this.stringToColor(this.headerColor);
+    }
 
     @observable isFetching = false;
     @observable didInvalidate = false;
@@ -45,6 +49,19 @@ export default class ColorsStore {
 
 
     constructor() {
-        autorun(() => console.log('Something has been changed'));
+        autorun(() => console.log(`Header color: ${this.headerColor}, Container color: ${this.containerColor}, Footer color: ${this.footerColor}`));
+    }
+
+    stringToColor(str) {
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        var colour = '#';
+        for (var i = 0; i < 3; i++) {
+            var value = (hash >> (i * 8)) & 0xFF;
+            colour += ('00' + value.toString(16)).substr(-2);
+        }
+        return colour;
     }
 }
