@@ -1,31 +1,34 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import LeftColumn from '../LeftColumn/LeftColumn.js';
 import RightColumn from '../RightColumn/RightColumn.js';
 import styles from './Container.less';
 
 class Container extends React.Component {
     static propTypes = {
-        color: PropTypes.string.isRequired //from Redux store
+        cursor: PropTypes.object.isRequired
     }
+
+    onComponentClick(){
+        this.props.cursor.swap(v => Object.assign({}, v, {
+            leftColumnColor: 'purple',
+            rightColumnColor: 'blue'
+        }));
+    }
+
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.color
+            backgroundColor: this.props.cursor.value().containerColor
         };
 
         return (
-            <div style={divStyles} className={styles.container}>
+            <div style={divStyles} className={styles.container} onClick={this.onComponentClick.bind(this)}>
                 <span className={styles.title}>Container</span>
-                <LeftColumn />
-                <RightColumn />
+                <LeftColumn cursor={this.props.cursor} />
+                <RightColumn cursor={this.props.cursor} />
             </div>
         );
     }
 }
 
-export default connect((state) => {
-    return {
-        color: state.colors.containerColor
-    };
-})(Container);
+export default Container;

@@ -1,16 +1,15 @@
 import React, { PropTypes } from 'react';
-import {observer, inject} from 'mobx-react';
+import { connect } from 'react-redux';
 import styles from './RightColumn.less';
 
-@inject("store") @observer
 class RightColumn extends React.Component {
     static propTypes = {
-        store: PropTypes.object.isRequired
+        color: PropTypes.string.isRequired
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.store.rightColumnColor
+            backgroundColor: this.props.color
         };
 
         return (
@@ -21,4 +20,8 @@ class RightColumn extends React.Component {
     }
 }
 
-export default RightColumn;
+export default connect((state) => {
+    return {
+        color: state.colors.rightColumnColor
+    };
+})(RightColumn);

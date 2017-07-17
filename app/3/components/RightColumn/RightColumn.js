@@ -13,15 +13,9 @@ class RightColumn extends React.Component {
         };
     }
 
-    onColorChange(newColor){
-        this.setState({
-            color: newColor
-        });
-    }
-
     render() {
         let divStyles = {
-            backgroundColor: this.state.color
+            backgroundColor: this.props.color
         };
 
         return (

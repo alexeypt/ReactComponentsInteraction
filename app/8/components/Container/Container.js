@@ -1,22 +1,29 @@
 import React, { PropTypes } from 'react';
-import {observer, inject} from 'mobx-react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import LeftColumn from '../LeftColumn/LeftColumn.js';
 import RightColumn from '../RightColumn/RightColumn.js';
 import styles from './Container.less';
+import { changeLeftColumnColor, changeRightColumnColor } from '../../actions/index';
 
-@inject("store") @observer
 class Container extends React.Component {
     static propTypes = {
-        store: PropTypes.object.isRequired
+        color: PropTypes.string.isRequired //from Redux store
     }
-    
+
+    onComponentClick(){
+        this.props.changeLeftColumnColor('purple');
+        this.props.changeRightColumnColor('blue');
+    }
+
+
     render() {
         let divStyles = {
-            backgroundColor: this.props.store.containerColor
+            backgroundColor: this.props.color
         };
 
         return (
-            <div style={divStyles} className={styles.container} >
+            <div style={divStyles} className={styles.container} onClick={this.onComponentClick.bind(this)}>
                 <span className={styles.title}>Container</span>
                 <LeftColumn />
                 <RightColumn />
@@ -25,4 +32,13 @@ class Container extends React.Component {
     }
 }
 
-export default Container;
+export default connect((state) => {
+    return {
+        color: state.colors.containerColor
+    };
+}, (dispatch) => {
+    return {
+        changeLeftColumnColor: bindActionCreators(changeLeftColumnColor, dispatch),
+        changeRightColumnColor: bindActionCreators(changeRightColumnColor, dispatch)
+    }
+})(Container);

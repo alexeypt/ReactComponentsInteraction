@@ -1,4 +1,11 @@
-import { CHANGE_RIGHT_COLUMN_COLOR, CHANGE_FOOTER_COLOR, REQUEST_COLORS, SUCCESS_COLORS, FAILURE_COLORS } from '../actions/index'
+import { 
+    CHANGE_RIGHT_COLUMN_COLOR,
+    CHANGE_LEFT_COLUMN_COLOR,
+    CHANGE_FOOTER_COLOR, 
+    REQUEST_COLORS, 
+    SUCCESS_COLORS, 
+    FAILURE_COLORS 
+} from '../actions/index'
 
 const initialState = {
     headerColor: 'red',
@@ -17,6 +24,10 @@ export default function colors(state = initialState, action) {
         case CHANGE_RIGHT_COLUMN_COLOR:
             return Object.assign({}, state, {
                 rightColumnColor: action.payload.color
+            })
+        case CHANGE_LEFT_COLUMN_COLOR:
+            return Object.assign({}, state, {
+                leftColumnColor: action.payload.color
             })
         case CHANGE_FOOTER_COLOR:
             return Object.assign({}, state, {

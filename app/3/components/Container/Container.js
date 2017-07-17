@@ -10,7 +10,6 @@ class Container extends React.Component {
 
     constructor(props) {
         super(props);
-        this.rightColumnComponent = null;
         this.state = {
             color: this.props.color,
             leftColumnColor: "blue",
@@ -21,12 +20,9 @@ class Container extends React.Component {
 
     changeColor(newColor){
         this.setState({
-            leftColumnColor: this.state.color,
-            color: newColor
+            leftColumnColor: this.state.rightColumnColor,
+            rightColumnColor: newColor
         });
-
-        const randomColor = '#' + Math.random().toString(16).substr(-6);
-        this.rightColumnComponent.onColorChange(randomColor);
     }
 
     render() {
@@ -38,7 +34,7 @@ class Container extends React.Component {
             <div style={divStyles} className={styles.container}>
                 <span className={styles.title}>Container</span>
                 <LeftColumn color={this.state.leftColumnColor} onChangeColor={this.changeColor} />
-                <RightColumn ref={(component) => { this.rightColumnComponent = component; }} color={this.state.rightColumnColor} />
+                <RightColumn color={this.state.rightColumnColor} />
             </div>
         );
     }

@@ -21,7 +21,8 @@ class Container extends React.Component {
         const tempColor = this.state.leftColumnColor;
         this.setState({
             leftColumnColor: this.state.rightColumnColor,
-            rightColumnColor: tempColor});
+            rightColumnColor: tempColor
+        });
     }
 
     render() {

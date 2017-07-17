@@ -1,29 +1,21 @@
 import React, { PropTypes } from 'react';
+import {observer, inject} from 'mobx-react';
 import styles from './Footer.less';
 
+@inject("store") @observer
 class Footer extends React.Component {
     static propTypes = {
-        cursor: PropTypes.object.isRequired
+        store: PropTypes.object.isRequired
     }
 
     onComponentClick(){
-        fetch('colors.json')
-            .then(result => result.json())
-            .then(json => this.successColors(json))
-    }
-
-    successColors(data) {
-        this.props.cursor.swap(v => Object.assign({}, v, {
-            ...data
-        }));
+        this.props.store.updateColors('colors.json');
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.cursor.value().footerColor
+            backgroundColor: this.props.store.footerColor
         };
-
-
 
         return (
             <div style={divStyles} className={styles.footer} onClick={this.onComponentClick.bind(this)}>

@@ -1,29 +1,27 @@
 import React, { PropTypes } from 'react';
-import {observer, inject} from 'mobx-react';
 import styles from './Header.less';
+import { connect } from 'react-redux';
 
-@inject("store") @observer
 class Header extends React.Component {
     static propTypes = {
-        store: PropTypes.object.isRequired
-    }
-
-    onComponentClick(){
-        this.props.store.changeFooterColor('purple');
-        this.props.store.changeRightColumnColor('yellow');
+        color: PropTypes.string.isRequired //from Redux store,
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.store.headerColor
+            backgroundColor: this.props.color
         };
 
         return (
-            <div style={divStyles} className={styles.header} onClick={this.onComponentClick.bind(this)}>
+            <div style={divStyles} className={styles.header}>
                 Header
             </div>
         );
     }
 }
 
-export default Header;
+export default connect((state) => {
+    return {
+        color: state.colors.headerColor
+    };
+})(Header);

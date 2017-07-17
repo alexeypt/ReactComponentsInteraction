@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 import LeftColumn from '../LeftColumn/LeftColumn.js';
 import RightColumn from '../RightColumn/RightColumn.js';
-import Footer from '../Footer/Footer.js';
 import styles from './Container.less';
-import {Gateway} from 'react-gateway';
+import eventEmitterService from '../../services/EventEmitterService';
 
 class Container extends React.Component {
     static propTypes = {
@@ -13,17 +12,28 @@ class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            color: this.props.color,
-            leftColumnColor: "blue",
-            rightColumnColor: "purple"
+            color: this.props.color
         };
+        this.changeColor = this.changeColor.bind(this);
+    }
+
+    componentDidMount(){
+        eventEmitterService.addListener('changeColor_container', this.changeColor);
+    }
+
+    componentWillUnmount(){
+        eventEmitterService.removeListener('changeColor_container', this.changeColor);
+    }
+
+    changeColor(newColor){
+        this.setState({
+            color: newColor
+        });
     }
 
     onComponentClick(){
-        const tempColor = this.state.leftColumnColor;
-        this.setState({
-            leftColumnColor: this.state.rightColumnColor,
-            rightColumnColor: tempColor});
+        eventEmitterService.emitEvent('changeColor_leftColumn', ['purple']);
+        eventEmitterService.emitEvent('changeColor_rightColumn', ['blue']);
     }
 
     render() {
@@ -34,11 +44,8 @@ class Container extends React.Component {
         return (
             <div style={divStyles} className={styles.container} onClick={this.onComponentClick.bind(this)}>
                 <span className={styles.title}>Container</span>
-                <LeftColumn color={this.state.leftColumnColor} />
-                <RightColumn color={this.state.rightColumnColor} />
-                <Gateway into="footer">
-                    <Footer color="yellow" />
-                </Gateway>
+                <LeftColumn color="blue" />
+                <RightColumn color="purple" />
             </div>
         );
     }

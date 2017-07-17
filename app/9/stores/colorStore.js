@@ -14,6 +14,10 @@ export default class ColorsStore {
     @observable isFetching = false;
     @observable didInvalidate = false;
 
+    @action changeLeftColumnColor(color){
+        this.leftColumnColor = color;
+    }
+
     @action changeRightColumnColor(color){
         this.rightColumnColor = color;
     }

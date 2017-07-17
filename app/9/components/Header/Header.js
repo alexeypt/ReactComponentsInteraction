@@ -1,29 +1,20 @@
 import React, { PropTypes } from 'react';
+import {observer, inject} from 'mobx-react';
 import styles from './Header.less';
 
+@inject("store") @observer
 class Header extends React.Component {
     static propTypes = {
-        cursor: PropTypes.object.isRequired
-    }
-
-    constructor(props) {
-        super(props);
-    }
-
-    onComponentClick(){
-        this.props.cursor.swap(v => Object.assign({}, v, {
-            footerColor: 'purple',
-            rightColumnColor: 'yellow'
-        }));
+        store: PropTypes.object.isRequired
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.cursor.value().headerColor
+            backgroundColor: this.props.store.headerColor
         };
 
         return (
-            <div style={divStyles} className={styles.header} onClick={this.onComponentClick.bind(this)}>
+            <div style={divStyles} className={styles.header}>
                 Header
             </div>
         );

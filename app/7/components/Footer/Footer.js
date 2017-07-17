@@ -1,37 +1,36 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { updateColors } from '../../actions/index';
 import styles from './Footer.less';
 
 class Footer extends React.Component {
     static propTypes = {
-        color: PropTypes.string.isRequired//from Redux store
+        cursor: PropTypes.object.isRequired
     }
 
     onComponentClick(){
-        this.props.updateColors('colors.json');
+        fetch('colors.json')
+            .then(result => result.json())
+            .then(json => this.successColors(json))
+    }
+
+    successColors(data) {
+        this.props.cursor.swap(v => Object.assign({}, v, {
+            ...data
+        }));
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.color
+            backgroundColor: this.props.cursor.value().footerColor
         };
 
+
+
         return (
-            <div onClick={this.onComponentClick.bind(this)} style={divStyles} className={styles.footer}>
+            <div style={divStyles} className={styles.footer} onClick={this.onComponentClick.bind(this)}>
                 Footer
             </div>
         );
     }
 }
 
-export default connect((state) => {
-    return {
-        color: state.colors.footerColor
-    };
-}, (dispatch) => {
-    return {
-        updateColors: bindActionCreators(updateColors, dispatch)
-    }
-})(Footer);
+export default Footer;

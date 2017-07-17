@@ -14,11 +14,11 @@ module.exports = {
         2: './app/2', //refs
         3: './app/3', //callback
         4: './app/4', //context
-        5: './app/5', //event emitter
-        6: './app/6', //portal
-        7: './app/7',  //redux
-        8: './app/8',  //mobx
-        9: './app/9'  //cursor
+        5: './app/5', //portal 
+        6: './app/6', //event emitter
+        7: './app/7', //cursor
+        8: './app/8', //redux
+        9: './app/9'  //mobx
     },
     output: {
         path: path.join(__dirname, 'build'),

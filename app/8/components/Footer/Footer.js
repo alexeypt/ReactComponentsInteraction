@@ -1,28 +1,37 @@
 import React, { PropTypes } from 'react';
-import {observer, inject} from 'mobx-react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateColors } from '../../actions/index';
 import styles from './Footer.less';
 
-@inject("store") @observer
 class Footer extends React.Component {
     static propTypes = {
-        store: PropTypes.object.isRequired
+        color: PropTypes.string.isRequired//from Redux store
     }
 
     onComponentClick(){
-        this.props.store.updateColors('colors.json');
+        this.props.updateColors('colors.json');
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.store.footerColor
+            backgroundColor: this.props.color
         };
 
         return (
-            <div style={divStyles} className={styles.footer} onClick={this.onComponentClick.bind(this)}>
+            <div onClick={this.onComponentClick.bind(this)} style={divStyles} className={styles.footer}>
                 Footer
             </div>
         );
     }
 }
 
-export default Footer;
+export default connect((state) => {
+    return {
+        color: state.colors.footerColor
+    };
+}, (dispatch) => {
+    return {
+        updateColors: bindActionCreators(updateColors, dispatch)
+    }
+})(Footer);

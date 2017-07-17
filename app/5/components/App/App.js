@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react';
 import Header from '../Header/Header.js';
-import Footer from '../Footer/Footer.js';
 import Container from '../Container/Container.js';
 import styles from './App.less';
-import eventEmitterService from '../../services/EventEmitterService';
-
+import { GatewayProvider, GatewayDest} from 'react-gateway';
 
 class App extends React.Component {
     static propTypes = {
@@ -17,11 +15,13 @@ class App extends React.Component {
         };
 
         return (
-            <div style={divStyles} className={styles['app']}>
-                <Header color="red" />
-                <Container color="green" />
-                <Footer color="yellow" />
-            </div>);
+            <GatewayProvider>
+                <div style={divStyles} className={styles['app']}>
+                    <Header color="red" />
+                    <Container color="green" />
+                    <GatewayDest name="footer" className="Footer__footer"/>
+                </div>
+            </GatewayProvider>);
     }
 
 }

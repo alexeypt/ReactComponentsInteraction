@@ -1,14 +1,16 @@
 import React, { PropTypes } from 'react';
+import {observer, inject} from 'mobx-react';
 import styles from './LeftColumn.less';
 
+@inject("store") @observer
 class LeftColumn extends React.Component {
     static propTypes = {
-        cursor: PropTypes.object.isRequired
+        store: PropTypes.object.isRequired
     }
 
     render() {
         let divStyles = {
-            backgroundColor: this.props.cursor.value().leftColumnColor
+            backgroundColor: this.props.store.leftColumnColor
         };
 
         return (
