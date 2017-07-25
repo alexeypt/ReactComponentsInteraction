@@ -12,7 +12,7 @@ This repository contains different ways of components interaction in React appli
 9. Mobx
 
 Application contains 6 components. Updating colors emulate components communication. 
-![alt text](https://bytebucket.org/Joiler/reactcomponentsinteraction/raw/113420dd7af0e7b49adfe423a20b3025adceca08/components.png "Components structure")
+![alt text](https://github.com/Joiler/ReactComponentsInteraction/blob/master/components.png "Components structure")
 
 ### How to use it
 
