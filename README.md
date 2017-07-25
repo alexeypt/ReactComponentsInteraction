@@ -3,7 +3,7 @@
 This repository contains different ways of components interaction in React application:
 1. React props and state
 2. Ref attribute
-3. Callbacks as a props
+3. Callbacks as props
 4. React context
 5. React portal
 6. Event system (event emitter)
